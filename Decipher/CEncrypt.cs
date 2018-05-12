@@ -20,7 +20,7 @@ namespace Decipher
         public CEncrypt() {
 
 
-            strEncry = "helloword";
+            strEncry = "assassinator";
             planeText = strEncry.ToCharArray();
 
         }
@@ -28,16 +28,15 @@ namespace Decipher
 
         public CEncrypt(string strEncry) {
 
-            strEncry = "helloword";
+            strEncry = "apple";
             planeText = strEncry.ToCharArray();
+            keyTable = new char[5, 5];
 
         }
 
         public int Initialize() {
 
-            keyTable = new char[5,5];
-
-
+           
             return (1);
 
         }
@@ -64,7 +63,7 @@ namespace Decipher
             }
 
             key = (new string(planeText).Replace(" ",""));
-            
+
             return (key);
 
         }
@@ -73,34 +72,55 @@ namespace Decipher
         //테이블 세팅하기
         public string setTable() {
 
-            
-
-            for (char c = key[key.Length-1]; c <= 'z' || c <= 'Z'; c++) {
+            for (char c = 'a'; c <= 'z' || c <= 'Z'; c++) {
 
                 for (int i = 0; i < key.Length; i++) {
 
-                    if (key[i] == c) { ++c; }
+                    if (key[i] == c) { c++; }
 
                 }
-                
+
                 key += c;
 
             }
+        
 
             //배열에 넣기
-            /*
+
+
+            keyTable = new char[5, 5];
+
             int k = 0;
             for (int i = 0; i < 5; i++) {
 
                 for (int j=0; j < 5; j++,k++) {
 
-                    keyTable[i, j] = key[k];
+                    
 
+                        if (key[k] == 'q' || key[k] == 'z') {
+
+                            for (int l = 0; l < key[k]; l++)
+                            {
+
+                                if (key[l] == 'q' || key[l] =='z')
+                                {
+
+                                    k++;
+
+
+                                    }
+                                }
+
+                            }
+                           
+
+                        
+
+                        keyTable[i, j] = key[k];
+                    }
+                
                 }
-
-            }
-            */
-
+            
             return (key);
 
         }
